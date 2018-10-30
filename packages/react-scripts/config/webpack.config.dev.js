@@ -80,7 +80,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
   if (preProcessor) {
     loaders.push({
       loader: require.resolve(preProcessor),
-      options: { includePaths: [paths.appNodeModules] }
+      options: { includePaths: [paths.appNodeModules, paths.rootNodeModules] },
     });
   }
   return loaders;
