@@ -95,6 +95,11 @@ module.exports = {
 // @remove-on-eject-begin
 const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 
+const rootNodeModules = () => {
+  const ownParent = resolveOwn('..');
+  return path.basename(ownParent) === 'node_modules' ? ownParent : '';
+};
+
 // config before eject: we're in ./node_modules/react-scripts/config/
 module.exports = {
   dotenv: resolveApp('.env'),
@@ -117,6 +122,8 @@ module.exports = {
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
   appTypeDeclarations: resolveApp('src/react-app-env.d.ts'),
   ownTypeDeclarations: resolveOwn('lib/react-app.d.ts'),
+  // Are we hoisted?
+  rootNodeModules: rootNodeModules(),
 };
 
 const ownPackageJson = require('../package.json');
